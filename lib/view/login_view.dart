@@ -5,6 +5,7 @@ import '../res/components/round_button.dart';
 import '../utils/routes/routes_name.dart';
 import '../utils/utils.dart';
 import '../view_model/auth_view_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
     final height  = MediaQuery.of(context).size.height * 1 ;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text(AppLocalizations.of(context)!.login),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -57,9 +58,9 @@ class _LoginViewState extends State<LoginView> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               focusNode: emailFocusNode,
-              decoration: const InputDecoration(
-                  hintText: 'Email',
-                  labelText: 'Email',
+              decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.email,
+                  labelText: AppLocalizations.of(context)!.email,
                   prefixIcon: Icon(Icons.alternate_email)
               ),
               onFieldSubmitted: (valu){
@@ -76,9 +77,9 @@ class _LoginViewState extends State<LoginView> {
 
                     obscuringCharacter: "*",
                     decoration: InputDecoration(
-                      hintText: 'Password',
-                      labelText: 'Password',
-                      prefixIcon: Icon(Icons.lock_open_rounded),
+                      hintText: AppLocalizations.of(context)!.password,
+                      labelText: AppLocalizations.of(context)!.password,
+                      prefixIcon: const Icon(Icons.lock_open_rounded),
                       suffixIcon: InkWell(
                           onTap: (){
                             _obsecurePassword.value = !_obsecurePassword.value ;
@@ -94,17 +95,17 @@ class _LoginViewState extends State<LoginView> {
             ),
             SizedBox(height: height * .085,),
             RoundButton(
-              title: 'Login',
+              title: AppLocalizations.of(context)!.login,
               loading: authViewMode.loading,
               onPress: (){
                 if(_emailController.text.isEmpty){
 
-                  Utils.flushBarErrorMessage('Please enter email', context);
+                  Utils.flushBarErrorMessage(AppLocalizations.of(context)!.please_enter_email, context);
                 }else if(_passwordController.text.isEmpty){
-                  Utils.flushBarErrorMessage('Please enter password', context);
+                  Utils.flushBarErrorMessage(AppLocalizations.of(context)!.please_enter_password, context);
 
                 }else if(_passwordController.text.length < 6){
-                  Utils.flushBarErrorMessage('Please enter 6 digit password', context);
+                  Utils.flushBarErrorMessage(AppLocalizations.of(context)!.please_enter_6_digit_password, context);
 
                 }else {
 
@@ -129,7 +130,7 @@ class _LoginViewState extends State<LoginView> {
                 onTap: (){
                   Navigator.pushNamed(context, RoutesName.signUp);
                 },
-                child: Text("Don't have an accont? Sign Up"))
+                child: Text(AppLocalizations.of(context)!.do_not_have_an_account))
 
           ],
         ),

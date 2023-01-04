@@ -1,0 +1,17 @@
+{
+    "splash_screen": "स्प्लैश स्क्रीन",
+    "login": "लॉग इन",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "please_enter_email": "कृपया ईमेल दर्ज करें",
+    "please_enter_password": "कृप्या पास्वर्ड भरो",
+    "please_enter_6_digit_password": "कृपया 6 अंकों का पासवर्ड दर्ज करें",
+    "do_not_have_an_account": "खाता नहीं है? साइन अप करें",
+    "sing_up":"साइन अप",
+    "already_have_an_account":"क्या आपके पास पहले से एक खाता मौजूद है? लॉग इन करें",
+    "logout":"लॉग आउट",
+    "hindi":"हिंदी",
+    "english":"अंग्रेज़ी",
+    "home":"होम",
+    "about_app":"ऐप के बारे में"
+}

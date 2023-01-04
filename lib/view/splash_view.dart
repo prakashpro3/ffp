@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../view_model/services/splash_services.dart';
+import '../view_model/classes/splash_services.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class _SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body:Center(
-        child: Text('Splash screen', style: Theme.of(context).textTheme.headline4,),
+        child: Text(AppLocalizations.of(context)!.splash_screen, style: Theme.of(context).textTheme.headline4,),
       ),
     );
   }

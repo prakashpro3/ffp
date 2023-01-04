@@ -6,6 +6,7 @@ import '../res/components/round_button.dart';
 import '../utils/routes/routes_name.dart';
 import '../utils/utils.dart';
 import '../view_model/auth_view_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class _SignUpViewState extends State<SignUpView> {
     final height  = MediaQuery.of(context).size.height * 1 ;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('SingUp'),
+        title: Text(AppLocalizations.of(context)!.sing_up),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -57,10 +58,10 @@ class _SignUpViewState extends State<SignUpView> {
               controller: _emailController,
               keyboardType: TextInputType.emailAddress,
               focusNode: emailFocusNode,
-              decoration: const InputDecoration(
-                  hintText: 'Email',
-                  labelText: 'Email',
-                  prefixIcon: Icon(Icons.alternate_email)
+              decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.email,
+                  labelText: AppLocalizations.of(context)!.email,
+                  prefixIcon: const Icon(Icons.alternate_email)
               ),
               onFieldSubmitted: (value){
                 Utils.fieldFocusChange(context, emailFocusNode, passwordFocusNode);
@@ -76,8 +77,8 @@ class _SignUpViewState extends State<SignUpView> {
 
                     obscuringCharacter: "*",
                     decoration: InputDecoration(
-                      hintText: 'Password',
-                      labelText: 'Password',
+                      hintText: AppLocalizations.of(context)!.password,
+                      labelText: AppLocalizations.of(context)!.password,
                       prefixIcon: const Icon(Icons.lock_open_rounded),
                       suffixIcon: InkWell(
                           onTap: (){
@@ -94,17 +95,17 @@ class _SignUpViewState extends State<SignUpView> {
             ),
             SizedBox(height: height * .085,),
             RoundButton(
-              title: 'Sign Up',
+              title: AppLocalizations.of(context)!.sing_up,
               loading: authViewMode.signUpLoading,
               onPress: (){
                 if(_emailController.text.isEmpty){
 
-                  Utils.flushBarErrorMessage('Please enter email', context);
+                  Utils.flushBarErrorMessage(AppLocalizations.of(context)!.please_enter_email, context);
                 }else if(_passwordController.text.isEmpty){
-                  Utils.flushBarErrorMessage('Please enter password', context);
+                  Utils.flushBarErrorMessage(AppLocalizations.of(context)!.please_enter_password, context);
 
                 }else if(_passwordController.text.length < 6){
-                  Utils.flushBarErrorMessage('Please enter 6 digit password', context);
+                  Utils.flushBarErrorMessage(AppLocalizations.of(context)!.please_enter_6_digit_password, context);
 
                 }else {
                   Map data = {
@@ -124,7 +125,7 @@ class _SignUpViewState extends State<SignUpView> {
                 onTap: (){
                   Navigator.pushNamed(context, RoutesName.login);
                 },
-                child: const Text("Already have an account? Login"))
+                child: Text(AppLocalizations.of(context)!.already_have_an_account))
 
           ],
         ),

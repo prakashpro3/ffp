@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:fpp/main.dart';
+import 'package:fpp/view_model/app_setting_view_model.dart';
 import 'package:fpp/view_model/user_list_view_model.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 
 import '../data/response/status.dart';
-import '../model/User_list_model.dart';
+import '../res/constants.dart';
 import '../utils/routes/routes_name.dart';
 import '../utils/utils.dart';
-import '../view_model/home_view_model.dart';
-import '../view_model/user_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,12 +18,10 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
 
-  //HomeViewViewModel  homeViewViewModel = HomeViewViewModel();
   UserListViewModel userListViewModel = UserListViewModel();
 
   @override
   void initState() {
-    //homeViewViewModel.fetchMoviesListApi();
     userListViewModel.getUserList(1);
     super.initState();
   }
@@ -36,26 +33,107 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userPreference = Provider.of<UserViewModel>(context);
+    final appSettingsProvider = Provider.of<AppSettingsViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          InkWell(
-              onTap: (){
-                userPreference.remove().then((value){
-                  Navigator.pushNamed(context, RoutesName.login);
-                });
-              },
-              child: const Center(child: Text('Logout'))),
-          const SizedBox(width: 20,)
+        title: Text(localise(context).home),
+        centerTitle: true,
+        actions:
+        [
+          Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  /*userPreference.remove().then((value){
+                    Navigator.pushNamed(context, RoutesName.login);
+                  });*/
+                  Navigator.pushNamed(context, RoutesName.drawerScreen);
+                },
+                child: const Center(child: Icon(Icons.logout)),
+              )
+          ),
+          Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: GestureDetector(
+                onTap: () {
+                    appSettingsProvider.getAppLanguage().then((locale)async{
+                      Locale lastAppLanguage = locale;
+                      var lastAppLanguageCode = lastAppLanguage.languageCode;
+                      var newLanguageCode = lastAppLanguageCode;
+                      Utils.setLog("AppLanguage", "lastAppLanguageCode - $lastAppLanguageCode");
+                      if(lastAppLanguageCode.isNotEmpty && lastAppLanguageCode == english){
+                        newLanguageCode = hindi;
+                      }else{
+                        newLanguageCode = english;
+                      }
+                      Locale newAppLanguage = await appSettingsProvider.setAppLanguage(newLanguageCode);
+                      MyApp.setLocal(context, newAppLanguage);
+                      Utils.setLog("AppLanguage", "newAppLanguage $newLanguageCode");
+                    });
+                  },
+                  child: const Icon(Icons.language),
+              )
+          ),
         ],
       ),
+
+      drawer: SafeArea(child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.5,
+        child: Drawer(
+          child: ListView(
+            children: [
+              const UserAccountsDrawerHeader(
+                decoration: BoxDecoration(color: Colors.blue),
+                accountName: Text('Pro'),
+                accountEmail: Text('Pro@gmail.com'),
+                currentAccountPicture: Image(image: AssetImage('assets/images/placeholder.png')),
+              ),
+              ListTile(
+                leading: const Icon(Icons.home),
+                title: Text(localise(context).home),
+                onTap: (){
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, RoutesName.homePage);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.login),
+                title: Text(localise(context).login),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(
+                    Icons.app_registration
+                ),
+                title: Text(localise(context).sing_up),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
+              AboutListTile(
+                icon: Icon(Icons.info),
+                applicationIcon: Icon(Icons.local_play),
+                applicationName: 'Flutter App',
+                applicationVersion: '1.0.0',
+                applicationLegalese: '© 2023 Pro',
+                aboutBoxChildren: const [
+                  SizedBox(height: 20,),
+                  Text('This is Flutter app')
+                ],
+                child: Text(localise(context).about_app),
+              ),
+            ],
+          ),
+        ),
+      )),
+
       body: ChangeNotifierProvider<UserListViewModel>(
         create: (BuildContext context) => userListViewModel,
         child: Consumer<UserListViewModel>(
             builder: (context, value, _){
-              switch(value.userList.status){
+              switch(value.userList.status!){
                 case Status.LOADING:
                   return const Center(child: CircularProgressIndicator());
                 case Status.ERROR:
@@ -89,7 +167,6 @@ class HomeScreenState extends State<HomeScreen> {
                         );
                       });
               }
-              return Container();
             }),
       ) ,
     );

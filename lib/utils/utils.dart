@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:another_flushbar/flushbar.dart';
 import 'package:another_flushbar/flushbar_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -57,6 +60,12 @@ class Utils {
             backgroundColor: Colors.red,
             content: Text(message ))
     );
+  }
+  
+  static setLog(String tag, String msg){
+    if(kDebugMode){
+      log("$tag: $msg");
+    }
   }
 
 }

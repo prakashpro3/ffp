@@ -1,0 +1,17 @@
+{
+    "splash_screen": "Splash screen",
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "please_enter_email": "Please enter email",
+    "please_enter_password": "Please enter password",
+    "please_enter_6_digit_password": "Please enter 6 digit password",
+    "do_not_have_an_account": "Don't have an account? Sign Up",
+    "sing_up":"Sign Up",
+    "already_have_an_account":"Already have an account? Login",
+    "logout":"Logout",
+    "hindi":"Hindi",
+    "english":"English",
+    "home":"Home",
+    "about_app":"About app"
+}
