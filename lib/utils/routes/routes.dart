@@ -17,7 +17,7 @@ class Routes {
         return MaterialPageRoute(builder: (BuildContext context) => const SplashView());
 
       case RoutesName.home:
-        return MaterialPageRoute(builder: (BuildContext context) => const HomeScreen());
+        //return MaterialPageRoute(builder: (BuildContext context) => const HomeScreen());
 
       case RoutesName.login:
         return MaterialPageRoute(builder: (BuildContext context) => const LoginView());

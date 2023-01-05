@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:fpp/main.dart';
+import 'package:fpp/utils/routes/app_routes.dart';
 import 'package:fpp/view_model/app_setting_view_model.dart';
 import 'package:fpp/view_model/user_list_view_model.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../data/response/status.dart';
 import '../res/constants.dart';
 import '../utils/routes/routes_name.dart';
 import '../utils/utils.dart';
+import '../view_model/user_view_model.dart';
+import 'tab_bar_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final String? userData;
+  const HomeScreen({Key? key, required this.userData}) : super(key: key);
 
   @override
   HomeScreenState createState() => HomeScreenState();
@@ -24,6 +29,8 @@ class HomeScreenState extends State<HomeScreen> {
   void initState() {
     userListViewModel.getUserList(1);
     super.initState();
+    //Utils.snackBar(widget.userData.toString(), context);
+    Utils.setLog("routeExtra", widget.userData.toString());
   }
 
   @override
@@ -33,6 +40,7 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userPreference = Provider.of<UserViewModel>(context);
     final appSettingsProvider = Provider.of<AppSettingsViewModel>(context);
     return Scaffold(
       appBar: AppBar(
@@ -45,9 +53,11 @@ class HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 onTap: () {
                   /*userPreference.remove().then((value){
-                    Navigator.pushNamed(context, RoutesName.login);
+                    //Navigator.pushNamed(context, RoutesName.login);
+                    context.go(AppRouter.login);
                   });*/
-                  Navigator.pushNamed(context, RoutesName.drawerScreen);
+                  //Navigator.pushNamed(context, RoutesName.drawerScreen);
+                  context.push(AppRouter.drawerWithMultiScreen);
                 },
                 child: const Center(child: Icon(Icons.logout)),
               )
@@ -110,6 +120,20 @@ class HomeScreenState extends State<HomeScreen> {
                 title: Text(localise(context).sing_up),
                 onTap: (){
                   Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.contact_page),
+                title: Text('Contact us'),
+                onTap: (){
+                  context.push(AppRouter.contactUsScreenWithParams());
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.contact_page),
+                title: Text('List view'),
+                onTap: (){
+                  context.push(AppRouter.listViewScreen(CurrentTab.contactus));
                 },
               ),
               AboutListTile(

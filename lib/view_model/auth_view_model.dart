@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fpp/utils/routes/app_routes.dart';
 import 'package:fpp/view_model/user_view_model.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../model/user_model.dart';
@@ -43,7 +45,8 @@ class AuthViewModel with ChangeNotifier {
       );
 
       Utils.flushBarErrorMessage('Login Successfully', context);
-      Navigator.pushNamed(context, RoutesName.home);
+      //Navigator.pushNamed(context, RoutesName.home);
+      context.go(AppRouter.home);
       if(kDebugMode){
         print(value.toString());
 
