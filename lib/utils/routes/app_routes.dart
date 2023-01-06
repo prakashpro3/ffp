@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fpp/view/bottom_navigation_bar_screen.dart';
 import 'package:fpp/view/drawer_screen.dart';
 import 'package:fpp/view/error_screen.dart';
 import 'package:fpp/view/home_page.dart';
@@ -25,6 +26,7 @@ class AppRouter {
   static const drawerScreen = '/drawerScreen';
   static const drawerWithMultiScreen = '/drawerWithMultiScreen';
   static const listView = '/listView';
+  static const bottomNavigationScreen = '/bottomNavigationBarScreen';
 
   // static const contactUsScreenWithParams = '/contactUs/:name';
   /// get route name with parameters, here [name] is optional because we need [:name] to define path on [_contactUsScreenRouteBuilder]
@@ -65,6 +67,9 @@ class AppRouter {
   static Widget _listVieScreenRouteBuilder(BuildContext context, GoRouterState state) =>
       TabBarScreen(initTab: state.params['type']! == CurrentTab.error.name ? CurrentTab.error : CurrentTab.contactus);
 
+  static Widget _bottomNavigationBarScreenRouteBuilder(BuildContext context, GoRouterState state) =>
+      const BottomNavigationBarScreen();
+
   /// use this in [MaterialApp.router]
   static final GoRouter _router = GoRouter(
     initialLocation: root,
@@ -77,6 +82,7 @@ class AppRouter {
       GoRoute(path: listViewScreen(), builder: _listVieScreenRouteBuilder),
       GoRoute(path: drawerScreen, builder: _drawerScreenRouteBuilder),
       GoRoute(path: drawerWithMultiScreen, builder: _drawerWithMultiScreenRouteBuilder),
+      GoRoute(path: bottomNavigationScreen, builder: _bottomNavigationBarScreenRouteBuilder)
     ],
     errorBuilder: errorWidget,
   );
