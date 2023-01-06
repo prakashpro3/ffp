@@ -124,21 +124,28 @@ class HomeScreenState extends State<HomeScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.contact_page),
-                title: Text('Contact us'),
+                title: const Text('Contact us'),
                 onTap: (){
                   context.push(AppRouter.contactUsScreenWithParams());
                 },
               ),
               ListTile(
                 leading: const Icon(Icons.contact_page),
-                title: Text('List view'),
+                title: const Text('List view'),
                 onTap: (){
                   context.push(AppRouter.listViewScreen(CurrentTab.contactus));
                 },
               ),
+              ListTile(
+                leading: Icon(Icons.queue_play_next),
+                title: const Text('BottomNavigation'),
+                onTap: (){
+                  context.push(AppRouter.bottomNavigationScreen);
+                },
+              ),
               AboutListTile(
-                icon: Icon(Icons.info),
-                applicationIcon: Icon(Icons.local_play),
+                icon: const Icon(Icons.info),
+                applicationIcon: const Icon(Icons.local_play),
                 applicationName: 'Flutter App',
                 applicationVersion: '1.0.0',
                 applicationLegalese: '© 2023 Pro',

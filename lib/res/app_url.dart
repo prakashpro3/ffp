@@ -13,5 +13,7 @@ class AppUrl {
 
   static var userList = '$baseUrl/api/users?page=';
 
+  static var getMemes = 'https://api.imgflip.com/get_memes';
+
 
 }
