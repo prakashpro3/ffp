@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fpp/respository/app_setting_repository.dart';
 import 'package:fpp/utils/routes/app_routes.dart';
 import 'package:fpp/utils/routes/routes.dart';
@@ -19,6 +20,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 void main() {
+  /*WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);*/
   runApp(const MyApp());
 }
 

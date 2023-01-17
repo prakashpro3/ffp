@@ -143,6 +143,20 @@ class HomeScreenState extends State<HomeScreen> {
                   context.push(AppRouter.bottomNavigationScreen);
                 },
               ),
+              ListTile(
+                leading: const Icon(Icons.stacked_bar_chart),
+                title: const Text("StackPositionedView"),
+                onTap: (){
+                  context.push(AppRouter.stackAndPositionedView);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.grid_3x3),
+                title: const Text("GridView"),
+                onTap: (){
+                  context.push(AppRouter.gridViewScreen);
+                },
+              ),
               AboutListTile(
                 icon: const Icon(Icons.info),
                 applicationIcon: const Icon(Icons.local_play),
