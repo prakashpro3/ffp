@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fpp/view/bottom_navigation_bar_screen.dart';
 import 'package:fpp/view/drawer_screen.dart';
 import 'package:fpp/view/error_screen.dart';
+import 'package:fpp/view/gridview_screen.dart';
 import 'package:fpp/view/home_page.dart';
 import 'package:fpp/view/home_screen.dart';
 import 'package:fpp/view/login_view.dart';
@@ -11,6 +12,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../model/user_model.dart';
 import '../../view/contact_us_screen.dart';
+import '../../view/stack_and_positioned_view.dart';
 import '../../view/tab_bar_screen.dart';
 import '../../view/splash_view.dart';
 import '../../view_model/user_view_model.dart';
@@ -27,6 +29,8 @@ class AppRouter {
   static const drawerWithMultiScreen = '/drawerWithMultiScreen';
   static const listView = '/listView';
   static const bottomNavigationScreen = '/bottomNavigationBarScreen';
+  static const stackAndPositionedView = '/stackAndPositionedView';
+  static const gridViewScreen = '/gridViewScreen';
 
   // static const contactUsScreenWithParams = '/contactUs/:name';
   /// get route name with parameters, here [name] is optional because we need [:name] to define path on [_contactUsScreenRouteBuilder]
@@ -70,6 +74,12 @@ class AppRouter {
   static Widget _bottomNavigationBarScreenRouteBuilder(BuildContext context, GoRouterState state) =>
       const BottomNavigationBarScreen();
 
+  static Widget _stackAndPositionedViewRouteBuilder(BuildContext context, GoRouterState state) =>
+      const StackAndPositionedView();
+
+  static Widget _gridViewScreenRouteBuilder(BuildContext context, GoRouterState state) =>
+      const GridViewScreen();
+
   /// use this in [MaterialApp.router]
   static final GoRouter _router = GoRouter(
     initialLocation: root,
@@ -82,7 +92,9 @@ class AppRouter {
       GoRoute(path: listViewScreen(), builder: _listVieScreenRouteBuilder),
       GoRoute(path: drawerScreen, builder: _drawerScreenRouteBuilder),
       GoRoute(path: drawerWithMultiScreen, builder: _drawerWithMultiScreenRouteBuilder),
-      GoRoute(path: bottomNavigationScreen, builder: _bottomNavigationBarScreenRouteBuilder)
+      GoRoute(path: bottomNavigationScreen, builder: _bottomNavigationBarScreenRouteBuilder),
+      GoRoute(path: stackAndPositionedView, builder: _stackAndPositionedViewRouteBuilder),
+      GoRoute(path: gridViewScreen, builder: _gridViewScreenRouteBuilder)
     ],
     errorBuilder: errorWidget,
   );
