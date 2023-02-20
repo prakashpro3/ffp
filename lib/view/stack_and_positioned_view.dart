@@ -14,7 +14,8 @@ class StackAndPositionedView extends StatelessWidget {
         //body:setAspectRatioView(context)
         //body:setFlexibleView()
         //body:setFractionallySizedBoxView()
-        body:setSingleChildScrollView()
+        //body:setSingleChildScrollView()
+        body:setWrapView()
     );
 
   }
@@ -264,6 +265,63 @@ class StackAndPositionedView extends StatelessWidget {
               )
             ],
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget setWrapView(){
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      child: Wrap(
+        direction: Axis.horizontal,
+        alignment: WrapAlignment.spaceEvenly,
+        runAlignment: WrapAlignment.center,
+        spacing: 10,
+        runSpacing: 10,
+        children: [
+          Container(
+            width: 90,
+            height: 100,
+            color: Colors.red,
+          ),
+          Container(
+            width: 90,
+            height: 100,
+            color: Colors.blue,
+          ),
+          Container(
+            width: 90,
+            height: 100,
+            color: Colors.yellow,
+          ),
+          Container(
+            width: 90,
+            height: 100,
+            color: Colors.green,
+          ),
+          Container(
+            width: 100,
+            height: 100,
+            color: Colors.blue,
+          ),
+          Container(
+            width: 100,
+            height: 100,
+            color: Colors.grey,
+          ),
+          Container(
+            width: 100,
+            height: 100,
+            color: Colors.brown,
+          ),
+          Container(
+            width: 100,
+            height: 100,
+            color: Colors.deepOrange,
+          ),
+
         ],
       ),
     );

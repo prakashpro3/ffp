@@ -157,6 +157,13 @@ class HomeScreenState extends State<HomeScreen> {
                   context.push(AppRouter.gridViewScreen);
                 },
               ),
+              ListTile(
+                leading: Icon(Icons.data_array),
+                title: Text("Data table"),
+                onTap: (){
+                  context.push(AppRouter.dataTableScreen);
+                },
+              ),
               AboutListTile(
                 icon: const Icon(Icons.info),
                 applicationIcon: const Icon(Icons.local_play),
