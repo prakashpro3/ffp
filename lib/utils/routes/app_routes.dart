@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fpp/view/bottom_navigation_bar_screen.dart';
+import 'package:fpp/view/data_table_view.dart';
 import 'package:fpp/view/drawer_screen.dart';
 import 'package:fpp/view/error_screen.dart';
 import 'package:fpp/view/gridview_screen.dart';
@@ -31,6 +32,7 @@ class AppRouter {
   static const bottomNavigationScreen = '/bottomNavigationBarScreen';
   static const stackAndPositionedView = '/stackAndPositionedView';
   static const gridViewScreen = '/gridViewScreen';
+  static const dataTableScreen = '/dataTableScreen';
 
   // static const contactUsScreenWithParams = '/contactUs/:name';
   /// get route name with parameters, here [name] is optional because we need [:name] to define path on [_contactUsScreenRouteBuilder]
@@ -79,6 +81,8 @@ class AppRouter {
 
   static Widget _gridViewScreenRouteBuilder(BuildContext context, GoRouterState state) =>
       const GridViewScreen();
+  static Widget _dataTableViewScreenRouteBuilder(BuildContext context, GoRouterState state) =>
+      const DataTableView();
 
   /// use this in [MaterialApp.router]
   static final GoRouter _router = GoRouter(
@@ -94,7 +98,8 @@ class AppRouter {
       GoRoute(path: drawerWithMultiScreen, builder: _drawerWithMultiScreenRouteBuilder),
       GoRoute(path: bottomNavigationScreen, builder: _bottomNavigationBarScreenRouteBuilder),
       GoRoute(path: stackAndPositionedView, builder: _stackAndPositionedViewRouteBuilder),
-      GoRoute(path: gridViewScreen, builder: _gridViewScreenRouteBuilder)
+      GoRoute(path: gridViewScreen, builder: _gridViewScreenRouteBuilder),
+      GoRoute(path: dataTableScreen, builder: _dataTableViewScreenRouteBuilder)
     ],
     errorBuilder: errorWidget,
   );
